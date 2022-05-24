@@ -45,7 +45,7 @@ setPaths(cachePath = checkPath(file.path(getwd(), "cache"), create = TRUE),
 ## NOTE: Currently, the functions are looping on their own over years. 
 ## Some work is needed to desconstruct the FEMALE_IBM_simulation_same_world() 
 ## to use the scheduler as expected.
-simTimes <- list(start = 1, end = 1) # need to figure out how to get it to be dynamic # have to add in clus object piece
+simTimes <- list(start = 1, end = 5) # need to figure out how to get it to be dynamic # have to add in clus object piece
 
 ## Setting up modules list 
 moduleList <- list("FLEX") # Name of the modules to run
@@ -56,9 +56,10 @@ moduleList <- list("FLEX") # Name of the modules to run
 parameters <- list(
   FLEX = list(
     "iterations" = 5, # using 5 for ease of testing, change to 100 once running
+    "calculateInterval" = 1, # the simulation time at which adult female established territories are calculated
     "propFemales" = 0.3, 
     "maxAgeFemale" = 9,
-    "D2_param" = "Max",
+    "D2_param" = "Max"
     )
 )
 
