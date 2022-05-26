@@ -55,11 +55,11 @@ moduleList <- list("FLEX") # Name of the modules to run
 ## defaults
 parameters <- list(
   FLEX = list(
-    "iterations" = 5, # using 5 for ease of testing, change to 100 once running
+    "simulations" = 5, # using 5 for ease of testing, change to 100 once running (number of simulations)
     "calculateInterval" = 1, # the simulation time at which adult female established territories are calculated
     "propFemales" = 0.3, 
     "maxAgeFemale" = 9,
-    "D2_param" = "Max"
+    "D2_param" = c("Max","SD")
     )
 )
 
@@ -80,6 +80,8 @@ mySim <- simInitAndSpades(times = simTimes,
 
 # Simulated start world
 mySim$FLEX_setup$r_start
+plot(mySim$FLEX_setup$r_start)
+
 
 # Population and Habitat info at start
 mySim$FLEX_setup$pop_info$suitable_habitat

@@ -27,5 +27,6 @@ installAndLoadPkgs <- function(){
       Require("PNWColors")
       Require("sf")
       Require("foreach")
+      Require("doParallel")
     }
   }
