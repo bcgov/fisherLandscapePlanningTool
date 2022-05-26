@@ -45,7 +45,7 @@ setPaths(cachePath = checkPath(file.path(getwd(), "cache"), create = TRUE),
 ## NOTE: Currently, the functions are looping on their own over years. 
 ## Some work is needed to desconstruct the FEMALE_IBM_simulation_same_world() 
 ## to use the scheduler as expected.
-simTimes <- list(start = 0, end = 1) # need to figure out how to get it to be dynamic # have to add in clus object piece
+simTimes <- list(start = 0, end = 2) # need to figure out how to get it to be dynamic # have to add in clus object piece
 
 ## Setting up modules list 
 moduleList <- list("FLEX") # Name of the modules to run
@@ -82,7 +82,6 @@ mySim <- simInitAndSpades(times = simTimes,
 mySim$FLEX_setup$r_start
 plot(mySim$FLEX_setup$r_start)
 
-
 # Population and Habitat info at start
 mySim$FLEX_setup$pop_info$suitable_habitat
 mySim$FLEX_setup$pop_info$total_habitat
@@ -90,24 +89,26 @@ mySim$FLEX_setup$pop_info$perc_habitat
 mySim$FLEX_setup$pop_info$numAF_start
 
 
-# Full dataset
+# Full dataset at end of second iteration
 mySim$FLEX_output
 
 # Aggregated dataset
 mySim$FLEX_agg_output
+mySim$FLEX_multi_output
 
 # Heatmap
-mySim$FLEX_heatmap$raster
-raster::plot(mySim$FLEX_heatmap$raster)
+mySim$FLEX_heatmap
+raster::plot(mySim$FLEX_heatmap)
 
-# Replicate simulations on which population did not crash 
-# (i.e., population reach zero)
-mySim$FLEX_heatmap$nozerosims
+mySim$FLEX_multi_heatmap
+raster::plot(mySim$FLEX_multi_heatmap)
 
-# Predicted information
+# population start and predicted info
+# need to remember what each value is really saying
 # Mean number of fisher
-mySim$FLEX_heatmap[[3]]$Fisher_Nmean
+mean(mySim$FLEX_heatmap$raster@data@values)
 # SE number of fisher
-mySim$FLEX_heatmap[[3]]$Fisher_Nse
+se <- function(x) sqrt(var(x)/length(x))
+se(mySim$FLEX_heatmap$raster@data@values)
 # Predicted number of adult fishers with established territories at end of run
-mySim$FLEX_heatmap[[3]]$Fpredicted
+round(sum(mySim$FLEX_heatmap$raster@data@values/5))
