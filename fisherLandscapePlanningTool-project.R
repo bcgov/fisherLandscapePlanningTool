@@ -106,9 +106,9 @@ raster::plot(mySim$FLEX_multi_heatmap)
 # population start and predicted info
 # need to remember what each value is really saying
 # Mean number of fisher
-mean(mySim$FLEX_heatmap$raster@data@values)
+mean(mySim$FLEX_heatmap@data@values)
 # SE number of fisher
 se <- function(x) sqrt(var(x)/length(x))
-se(mySim$FLEX_heatmap$raster@data@values)
+se(mySim$FLEX_heatmap@data@values)
 # Predicted number of adult fishers with established territories at end of run
-round(sum(mySim$FLEX_heatmap$raster@data@values/5))
+round(sum(mySim$FLEX_heatmap@data@values/5))
